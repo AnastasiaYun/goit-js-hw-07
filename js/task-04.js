@@ -1,22 +1,33 @@
-const value = document.querySelector('#value')
-console.log(value.textContent);
-const btns = document.querySelectorAll("button")
-console.log(btns);
 
-let counterValue = 0;
-btns.forEach(function (btn) {
+const counter = {
+  value: 0,
+  increment() {
+    console.log("increment -> this", this);
+    this.value += 1;
+  },
+  decrement() {
+    console.log("decrement -> this", this);
+    this.value -= 1;
+  },
+};
 
-    console.log(btn.dataset.action)
+const decrementBtn = document.querySelector('.js-decrement');
+const incrementBtn = document.querySelector('.js-increment');
+const valueEl = document.querySelector('#value');
 
-    btn.addEventListener('click', function (e) {
-        if (btn.dataset.action === 'decrement') {
-            counterValue -= 1
-        }
-        else if (btn.dataset.action === 'increment') {
-            counterValue += 1
-        }
-        value.textContent = counterValue
-        
-        console.log(value.textContent)
-    });
+decrementBtn.addEventListener('click', function () {
+   counter.decrement();
+   console.log(counter);
+
+   valueEl.textContent = counter.value
+
 });
+
+incrementBtn.addEventListener('click', function () {
+    counter.increment();
+    console.log(counter);
+
+    valueEl.textContent = counter.value
+ 
+ })
+
